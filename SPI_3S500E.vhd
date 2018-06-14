@@ -15,14 +15,9 @@ entity X3S500E is
 	port(
 		clk, reset: in std_logic;
 
---		MOSI_o : out std_logic;
---		MISO_i : in std_logic;
---		SCLK_o : out std_logic;
---		SS_o : out std_logic_vector(1 downto 0);
 		MOSI_i : in std_logic;
 		MISO_o : out std_logic;
 		SCLK_i : in std_logic;
---		SS_i : in std_logic;
 		SS_i : in std_logic_vector(1 downto 0);
 		test : out std_logic_vector(3 downto 0);
 		led1: out std_logic_vector(3 downto 0)
@@ -47,7 +42,7 @@ architecture truck_arch of X3S500E is
 
 	signal echo_data1 : std_logic_vector(7 downto 0);
 	signal echo_data2 : std_logic_vector(7 downto 0);
-	signal MISO1, MISO2: std_logic_vector(7 downto 0);
+	signal MISO1, MISO2: std_logic;
 	
 	constant TIME_DELAY:  integer:= 50000;
 	signal my_reset: std_logic;
@@ -57,6 +52,8 @@ architecture truck_arch of X3S500E is
 begin
 
 my_reset <= not reset;
+
+MISO_o <= MISO1 and MISO2;
 
 spi_slave_unit1: entity work. SPI_SLAVE(RTL)
 	port map(CLK=>clk, RST=>my_reset,

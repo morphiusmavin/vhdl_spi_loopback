@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="/home/dan/dev/Xilinx/loopback/tb_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="math_real" />
+            <top_module name="numeric_std" />
+            <top_module name="std_logic_1164" />
+            <top_module name="std_logic_arith" />
+            <top_module name="std_logic_signed" />
+            <top_module name="tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="10" />
+   <wvobject fp_name="/tb/mosi_i" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">mosi_i</obj_property>
+      <obj_property name="ObjectShortName">mosi_i</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/sclk_i" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sclk_i</obj_property>
+      <obj_property name="ObjectShortName">sclk_i</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/ss_i" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">ss_i[1:0]</obj_property>
+      <obj_property name="ObjectShortName">ss_i[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/miso_o" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">miso_o</obj_property>
+      <obj_property name="ObjectShortName">miso_o</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/addr" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">addr[0:0]</obj_property>
+      <obj_property name="ObjectShortName">addr[0:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/test1" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">test1[3:0]</obj_property>
+      <obj_property name="ObjectShortName">test1[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/addr2" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">addr2[1:0]</obj_property>
+      <obj_property name="ObjectShortName">addr2[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/sample" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sample[7:0]</obj_property>
+      <obj_property name="ObjectShortName">sample[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/uut/echo_data1" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">echo_data1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">echo_data1[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/uut/echo_data2" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">echo_data2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">echo_data2[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+   </wvobject>
+</wave_config>

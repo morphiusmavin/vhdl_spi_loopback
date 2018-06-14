@@ -79,7 +79,7 @@ my_reset <= not reset;
           MOSI_i => MOSI_i,
           MISO_o => MISO_o,
           SCLK_i => SCLK_i,
-          SS_i =>addr,
+          SS_i =>addr2,
           test => test1,
           led1 => led2
         );
