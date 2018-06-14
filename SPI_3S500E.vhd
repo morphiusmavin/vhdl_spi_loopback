@@ -1,4 +1,9 @@
 -- SPI_3S500E.vhd - 6/13/2018 -- Dan Hampleman - test program as part of a larger project
+-- a loopback test for 2 different slaves in the uut and a master in the test bench
+-- slave1 & 2 gets MOSI, MISO, SCLK while slave1 gets SS(0) and slave2 gets SS(1)
+-- spi_master.vhd and spi_slave.vhd use active low reset but I use active high
+-- use my_reset to invert it
+-- 
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -30,15 +35,11 @@ architecture truck_arch of X3S500E is
 	signal time_delay_reg, time_delay_next: unsigned(23 downto 0);
 	signal time_delay_reg7, time_delay_next7: unsigned(23 downto 0);
 
-	signal skip: std_logic_vector(1 downto 0);
-	signal skip3, skip4: std_logic;
-
 	signal mspi_ready : std_logic;
 	signal mspi_din_vld, mspi_dout_vld : std_logic;
 --	signal mosi, miso, sclk, ss: std_logic;
 	signal mspi_din, mspi_dout : std_logic_vector(7 downto 0);
-	signal stlv_temp1 : std_logic_vector(7 downto 0);
-	signal stlv_temp1a : std_logic_vector(7 downto 0);
+	signal echo_data : std_logic_vector(7 downto 0);
 	constant TIME_DELAY:  integer:= 50000;
 	signal my_reset: std_logic;
 
@@ -65,11 +66,9 @@ variable temp3: integer range 0 to 7:= 1;
 begin
 	if reset = '0' then
 		state_dout_reg <= idle_dout;
-		stlv_temp1 <= (others=>'0');
-		stlv_temp1a <= (others=>'0');
+		echo_data <= (others=>'0');
 		mspi_din_vld <= '0';
 		mspi_din <= (others=>'0');
-		skip3 <= '0';
 		time_delay_reg7 <= (others=>'0');
 		time_delay_next7 <= (others=>'0');
 		led1 <= "1010";
@@ -86,13 +85,13 @@ begin
 				state_dout_next <= done_dout;
 			when done_dout =>
 				if mspi_dout_vld = '1' then
-					stlv_temp1a <= mspi_dout;  -- mspi_dout is what gets received by MISO
-					led1 <= stlv_temp1a(3 downto 0);
+					echo_data <= mspi_dout;  -- mspi_dout is what gets received by MISO
+					led1 <= echo_data(3 downto 0);
 --					state_dout_next <= wait_dout;
 					state_dout_next <= wait_dout;
 				end if;
 			when wait_dout =>
-				mspi_din <= stlv_temp1a;		-- write
+				mspi_din <= echo_data;		-- write
 				mspi_din_vld <= '1';
 				state_dout_next <= idle_dout;
 		end case;

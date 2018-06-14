@@ -47,8 +47,7 @@ ARCHITECTURE behavior OF tb IS
 	signal mspi_din_vld, mspi_dout_vld : std_logic;
 --	signal mosi, miso, sclk, ss: std_logic;
 	signal mspi_din, mspi_dout : std_logic_vector(7 downto 0);
-	signal stlv_temp1 : std_logic_vector(7 downto 0);
-	signal stlv_temp1a : std_logic_vector(7 downto 0);
+	signal recvd_data : std_logic_vector(7 downto 0);
 
 	constant SLAVE_COUNT:  integer:= 2;
 
@@ -68,6 +67,7 @@ ARCHITECTURE behavior OF tb IS
 	signal sample: unsigned(7 downto 0);
 	signal last: std_logic;
 	signal my_reset: std_logic;
+	signal skip2: std_logic;
 
 BEGIN
  
@@ -124,8 +124,7 @@ echo_dout_unit2: process(clk, reset, state_dout_reg)
 begin
 	if reset = '0' then
 		state_dout_reg <= idle_dout;
-		stlv_temp1 <= (others=>'0');
-		stlv_temp1a <= (others=>'0');
+		recvd_data <= (others=>'0');
 		mspi_din_vld <= '1';
 		mspi_din <= (others=>'0');
 		skip <= '0';
@@ -134,6 +133,7 @@ begin
 		addr <= (others=>'0');
 		sample <= (others=>'0');
 		last <= '0';
+		skip2 <= '0';
 
 	else if clk'event and clk = '1' then
 		case state_dout_reg is
@@ -143,7 +143,10 @@ begin
 					mspi_din <= conv_std_logic_vector(conv_integer(sample),8);  -- write
 					skip <= not skip;
 					if skip = '1' then
-						addr <= not addr;
+						skip2 <= not skip2;
+						if skip2 = '1' then
+							addr <= not addr;
+						end if;
 						sample <= sample + 1;
 					end if;
 					mspi_din_vld <= '1';
@@ -154,7 +157,7 @@ begin
 				mspi_din_vld <= '0';			
 				if mspi_dout_vld = '1' then
 -- mspi_dout is what gets received by MISO
-					stlv_temp1a <= mspi_dout;
+					recvd_data <= mspi_dout;
 					state_dout_next <= time_delay_dout;
 				end if;
 			when time_delay_dout =>

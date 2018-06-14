@@ -3,7 +3,7 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="/home/dan/dev/Xilinx/SPI_test/tb_isim_beh.wdb" id="1" type="auto">
+      <db_ref path="/home/dan/dev/Xilinx/loopback/tb_isim_beh.wdb" id="1" type="auto">
          <top_modules>
             <top_module name="math_real" />
             <top_module name="numeric_std" />
@@ -14,64 +14,177 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="13" />
+   <WVObjectSize size="27" />
    <wave_markers>
       <marker time="319000000" label="" />
    </wave_markers>
+   <wvobject fp_name="/tb/addr2" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">addr2[1:0]</obj_property>
+      <obj_property name="ObjectShortName">addr2[1:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/mosi_i" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">mosi_i</obj_property>
+      <obj_property name="ObjectShortName">mosi_i</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/miso_o" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">miso_o</obj_property>
+      <obj_property name="ObjectShortName">miso_o</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/sclk_i" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sclk_i</obj_property>
+      <obj_property name="ObjectShortName">sclk_i</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/ss_i" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">ss_i</obj_property>
+      <obj_property name="ObjectShortName">ss_i</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/addr" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">addr[0:0]</obj_property>
+      <obj_property name="ObjectShortName">addr[0:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/ss" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">ss</obj_property>
+      <obj_property name="ObjectShortName">ss</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/last" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">last</obj_property>
+      <obj_property name="ObjectShortName">last</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/mspi_ready" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">mspi_ready</obj_property>
+      <obj_property name="ObjectShortName">mspi_ready</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/mspi_din_vld" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">mspi_din_vld</obj_property>
+      <obj_property name="ObjectShortName">mspi_din_vld</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/mspi_dout_vld" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">mspi_dout_vld</obj_property>
+      <obj_property name="ObjectShortName">mspi_dout_vld</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/mspi_din" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">mspi_din[7:0]</obj_property>
+      <obj_property name="ObjectShortName">mspi_din[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/mspi_dout" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">mspi_dout[7:0]</obj_property>
+      <obj_property name="ObjectShortName">mspi_dout[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/recvd_data" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">recvd_data[7:0]</obj_property>
+      <obj_property name="ObjectShortName">recvd_data[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/sample" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sample[7:0]</obj_property>
+      <obj_property name="ObjectShortName">sample[7:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/state_dout_reg" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">state_dout_reg</obj_property>
+      <obj_property name="ObjectShortName">state_dout_reg</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
    <wvobject fp_name="/tb/uut/mosi_i" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">mosi_i</obj_property>
       <obj_property name="ObjectShortName">mosi_i</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
    </wvobject>
    <wvobject fp_name="/tb/uut/miso_o" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">miso_o</obj_property>
       <obj_property name="ObjectShortName">miso_o</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
    </wvobject>
    <wvobject fp_name="/tb/uut/sclk_i" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">sclk_i</obj_property>
       <obj_property name="ObjectShortName">sclk_i</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
    </wvobject>
    <wvobject fp_name="/tb/uut/ss_i" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">ss_i</obj_property>
       <obj_property name="ObjectShortName">ss_i</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
    </wvobject>
    <wvobject fp_name="/tb/uut/state_dout_reg" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">state_dout_reg</obj_property>
       <obj_property name="ObjectShortName">state_dout_reg</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
    </wvobject>
    <wvobject fp_name="/tb/uut/mspi_ready" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">mspi_ready</obj_property>
       <obj_property name="ObjectShortName">mspi_ready</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
    </wvobject>
    <wvobject fp_name="/tb/uut/mspi_din_vld" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">mspi_din_vld</obj_property>
       <obj_property name="ObjectShortName">mspi_din_vld</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
    </wvobject>
    <wvobject fp_name="/tb/uut/mspi_dout_vld" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">mspi_dout_vld</obj_property>
       <obj_property name="ObjectShortName">mspi_dout_vld</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
    </wvobject>
    <wvobject fp_name="/tb/uut/mspi_din" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">mspi_din[7:0]</obj_property>
       <obj_property name="ObjectShortName">mspi_din[7:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/tb/uut/mspi_dout" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">mspi_dout[7:0]</obj_property>
       <obj_property name="ObjectShortName">mspi_dout[7:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb/uut/stlv_temp1" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">stlv_temp1[7:0]</obj_property>
-      <obj_property name="ObjectShortName">stlv_temp1[7:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb/uut/stlv_temp1a" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">stlv_temp1a[7:0]</obj_property>
-      <obj_property name="ObjectShortName">stlv_temp1a[7:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb/addr2" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">addr2[1:0]</obj_property>
-      <obj_property name="ObjectShortName">addr2[1:0]</obj_property>
+   <wvobject fp_name="/tb/uut/echo_data" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">echo_data[7:0]</obj_property>
+      <obj_property name="ObjectShortName">echo_data[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
    </wvobject>
 </wave_config>
