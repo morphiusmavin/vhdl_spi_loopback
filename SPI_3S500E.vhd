@@ -9,6 +9,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_arith.all;
 use ieee.std_logic_signed.all;
+use ieee.math_real.all;
 
 entity X3S500E is
 	port(
@@ -21,7 +22,8 @@ entity X3S500E is
 		MOSI_i : in std_logic;
 		MISO_o : out std_logic;
 		SCLK_i : in std_logic;
-		SS_i : in std_logic;
+--		SS_i : in std_logic;
+		SS_i : in std_logic_vector(1 downto 0);
 		test : out std_logic_vector(3 downto 0);
 		led1: out std_logic_vector(3 downto 0)
 		);
@@ -29,78 +31,124 @@ end X3S500E;
 
 architecture truck_arch of X3S500E is
 
-	type state_dout is (idle_dout, start_dout, done_dout, wait_dout);
-	signal state_dout_reg, state_dout_next: state_dout;
+	type state_dout1 is (idle_dout1, start_dout1, done_dout1, wait_dout1);
+	signal state_dout_reg1, state_dout_next1: state_dout1;
 
-	signal time_delay_reg, time_delay_next: unsigned(23 downto 0);
-	signal time_delay_reg7, time_delay_next7: unsigned(23 downto 0);
+	type state_dout2 is (idle_dout2, start_dout2, done_dout2, wait_dout2);
+	signal state_dout_reg2, state_dout_next2: state_dout2;
 
-	signal mspi_ready : std_logic;
-	signal mspi_din_vld, mspi_dout_vld : std_logic;
---	signal mosi, miso, sclk, ss: std_logic;
-	signal mspi_din, mspi_dout : std_logic_vector(7 downto 0);
-	signal echo_data : std_logic_vector(7 downto 0);
+	signal mspi_ready1 : std_logic;
+	signal mspi_din_vld1, mspi_dout_vld1 : std_logic;
+	signal mspi_din1, mspi_dout1 : std_logic_vector(7 downto 0);
+
+	signal mspi_ready2 : std_logic;
+	signal mspi_din_vld2, mspi_dout_vld2 : std_logic;
+	signal mspi_din2, mspi_dout2 : std_logic_vector(7 downto 0);
+
+	signal echo_data1 : std_logic_vector(7 downto 0);
+	signal echo_data2 : std_logic_vector(7 downto 0);
+	signal MISO1, MISO2: std_logic_vector(7 downto 0);
+	
 	constant TIME_DELAY:  integer:= 50000;
 	signal my_reset: std_logic;
+	constant SLAVE_COUNT:  integer:= 2;
+	signal addr: std_logic_vector(integer(ceil(log2(real(SLAVE_COUNT))))-1 downto 0); -- SPI slave address
 
 begin
 
 my_reset <= not reset;
 
-spi_slave_unit: entity work. SPI_SLAVE(RTL)
+spi_slave_unit1: entity work. SPI_SLAVE(RTL)
 	port map(CLK=>clk, RST=>my_reset,
 	SCLK=>SCLK_i,
-	CS_N=>SS_i,
+	CS_N=>SS_i(0),
 	MOSI=>MOSI_i,
-	MISO=>MISO_o,
-	READY=>mspi_ready,
-	DIN=>mspi_din,
-	DIN_VLD=>mspi_din_vld,
-	DOUT=>mspi_dout,
-	DOUT_VLD=>mspi_dout_vld);
+	MISO=>MISO1,
+	READY=>mspi_ready1,
+	DIN=>mspi_din1,
+	DIN_VLD=>mspi_din_vld1,
+	DOUT=>mspi_dout1,
+	DOUT_VLD=>mspi_dout_vld1);
 
-echo_dout_unit2: process(clk, reset, state_dout_reg)
-variable temp1: integer range 0 to 255:= 0;
-variable temp2: integer range 0 to 255:= 255;
-variable temp3: integer range 0 to 7:= 1;
+spi_slave_unit2: entity work. SPI_SLAVE(RTL)
+	port map(CLK=>clk, RST=>my_reset,
+	SCLK=>SCLK_i,
+	CS_N=>SS_i(1),
+	MOSI=>MOSI_i,
+	MISO=>MISO2,
+	READY=>mspi_ready2,
+	DIN=>mspi_din2,
+	DIN_VLD=>mspi_din_vld2,
+	DOUT=>mspi_dout2,
+	DOUT_VLD=>mspi_dout_vld2);
+
+echo_dout_unit1: process(clk, reset, state_dout_reg1)
 begin
 	if reset = '0' then
-		state_dout_reg <= idle_dout;
-		echo_data <= (others=>'0');
-		mspi_din_vld <= '0';
-		mspi_din <= (others=>'0');
-		time_delay_reg7 <= (others=>'0');
-		time_delay_next7 <= (others=>'0');
-		led1 <= "1010";
-		test <= (others=>'0');
+		state_dout_reg1 <= idle_dout1;
+		echo_data1 <= (others=>'0');
+		mspi_din_vld1 <= '0';
+		mspi_din1 <= (others=>'0');
 
 	else if clk'event and clk = '1' then
-		case state_dout_reg is
-			when idle_dout =>
-				mspi_din_vld <= '0';
-				if mspi_ready = '1' then
-					state_dout_next <= start_dout;
+		case state_dout_reg1 is
+			when idle_dout1 =>
+				mspi_din_vld1 <= '0';
+				if mspi_ready1 = '1' then
+					state_dout_next1 <= start_dout1;
 				end if;
-			when start_dout =>
-				state_dout_next <= done_dout;
-			when done_dout =>
-				if mspi_dout_vld = '1' then
-					echo_data <= mspi_dout;  -- mspi_dout is what gets received by MISO
-					led1 <= echo_data(3 downto 0);
---					state_dout_next <= wait_dout;
-					state_dout_next <= wait_dout;
+			when start_dout1 =>
+				state_dout_next1 <= done_dout1;
+			when done_dout1 =>
+				if mspi_dout_vld1 = '1' then
+					echo_data1 <= mspi_dout1;  -- mspi_dout is what gets received by MISO
+					state_dout_next1 <= wait_dout1;
 				end if;
-			when wait_dout =>
-				mspi_din <= echo_data;		-- write
-				mspi_din_vld <= '1';
-				state_dout_next <= idle_dout;
+			when wait_dout1 =>
+				mspi_din1 <= echo_data1;		-- write
+				mspi_din_vld1 <= '1';
+				state_dout_next1 <= idle_dout1;
 		end case;
-		time_delay_reg7 <= time_delay_next7;
-		state_dout_reg <= state_dout_next;
+		state_dout_reg1 <= state_dout_next1;
 		end if;
 	end if;
 end process;	
 
+echo_dout_unit2: process(clk, reset, state_dout_reg2)
+begin
+	if reset = '0' then
+		state_dout_reg2 <= idle_dout2;
+		echo_data2 <= (others=>'0');
+		mspi_din_vld2 <= '0';
+		mspi_din2 <= (others=>'0');
+		led1 <= "1010";
+		test <= (others=>'0');
+
+	else if clk'event and clk = '1' then
+		case state_dout_reg2 is
+			when idle_dout2 =>
+				mspi_din_vld2 <= '0';
+				if mspi_ready2 = '1' then
+					state_dout_next2 <= start_dout2;
+				end if;
+			when start_dout2 =>
+				state_dout_next2 <= done_dout2;
+			when done_dout2 =>
+				if mspi_dout_vld2 = '1' then
+					echo_data2 <= mspi_dout2;  -- mspi_dout is what gets received by MISO
+					led1 <= echo_data2(3 downto 0);
+--					state_dout_next <= wait_dout;
+					state_dout_next2 <= wait_dout2;
+				end if;
+			when wait_dout2 =>
+				mspi_din2 <= echo_data2;		-- write
+				mspi_din_vld2 <= '1';
+				state_dout_next2 <= idle_dout2;
+		end case;
+		state_dout_reg2 <= state_dout_next2;
+		end if;
+	end if;
+end process;	
 
 end truck_arch;
 

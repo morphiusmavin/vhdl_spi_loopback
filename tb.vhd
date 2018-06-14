@@ -23,7 +23,7 @@ ARCHITECTURE behavior OF tb IS
          MOSI_i : in  std_logic;
          MISO_o : out  std_logic;
          SCLK_i : in  std_logic;
-         SS_i : in  std_logic;
+         SS_i : in  std_logic_vector(1 downto 0);
          test : OUT  std_logic_vector(3 downto 0);
          led1 : OUT  std_logic_vector(3 downto 0)
         );
@@ -35,7 +35,7 @@ ARCHITECTURE behavior OF tb IS
    signal reset : std_logic := '0';
    signal MOSI_i : std_logic := '0';
    signal SCLK_i : std_logic := '0';
-   signal SS_i : std_logic := '0';
+   signal SS_i : std_logic_vector(1 downto 0) := (others=>'0');
 
  	--Outputs
    signal MISO_o : std_logic := '0';
@@ -50,9 +50,8 @@ ARCHITECTURE behavior OF tb IS
 	signal recvd_data : std_logic_vector(7 downto 0);
 
 	constant SLAVE_COUNT:  integer:= 2;
-
 	signal addr: std_logic_vector(integer(ceil(log2(real(SLAVE_COUNT))))-1 downto 0); -- SPI slave address
---	signal addr: std_logic_vector(1 downto 0);
+
 	type state_dout is (idle_dout, start_dout, time_delay_dout, done_dout);
 	signal state_dout_reg, state_dout_next: state_dout;
 
@@ -80,7 +79,7 @@ my_reset <= not reset;
           MOSI_i => MOSI_i,
           MISO_o => MISO_o,
           SCLK_i => SCLK_i,
-          SS_i =>ss,
+          SS_i =>addr,
           test => test1,
           led1 => led2
         );
