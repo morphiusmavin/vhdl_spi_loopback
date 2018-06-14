@@ -1,0 +1,23 @@
+##############################################Core3S500E#################################################
+NET		"clk"	LOC = "P184" ;
+NET		"reset"	LOC = "P101" ;
+
+#SPI master signals
+NET		"MOSI_o"	LOC = "P48";
+NET		"MISO_i"	LOC = "P45";
+NET		"SCLK_o"	LOC = "P41";
+NET		"SS_o"		LOC = "P39";
+
+# if using slave select for 2 different SPI slaves
+
+NET	"test[0]"	LOC = "P61";
+NET	"test[1]"	LOC = "p55";
+NET	"test[2]"	LOC = "p49";
+NET	"test[3]"	LOC = "p47";
+
+# led1 is the build-in LED's on the board
+NET		"led1[0]"	LOC = "p68";
+NET		"led1[1]"	LOC = "p78";
+NET		"led1[2]"	LOC = "p83";
+NET		"led1[3]"	LOC = "p89";
+
